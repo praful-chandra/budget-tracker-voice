@@ -38,7 +38,7 @@ const Main = () => {
           Try saying: <br />ADD INCOME FOR 100RS IN CATEGORY SALARY FOR MONDAY
           </div>
         </Typography>
-        <Divider />
+        <Divider className={classes.divider} />
         {/* Form component */}
         <Form />
       </CardContent>
