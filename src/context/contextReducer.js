@@ -1,17 +1,18 @@
 const contextReducer = (state, action) => {
+  if (action.type === "DELETE_TRANSACTION") {
+    const transactions = state.filter((t) => t.id !== action.payload);
 
-  if(action.type === 'DELETE_TRANSACTION'){
+    localStorage.setItem("transactions", JSON.stringify(transactions));
 
-    return  state.filter((t)=>t.id !== action.payload);
+    return transactions;
+  } else if (action.type === "ADD_TRANSACTION") {
+    const transactions = [action.payload, ...state];
+    localStorage.setItem("transactions", JSON.stringify(transactions));
 
-  }else if (action.type === 'ADD_TRANSACTION'){
-
-    return [action.payload, ...state];
-
-  }else{
-      return state;
+    return transactions;
+  } else {
+    return state;
   }
-
 };
 
 export default contextReducer;
