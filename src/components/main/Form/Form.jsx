@@ -15,11 +15,17 @@ import useStyles from "./styles";
 
 import { ExpenseTrackerContext } from "../../../context/context";
 
+import {
+  incomeCategories,
+  expenseCategories,
+} from "../../../constants/categories";
+import formatDate from "../../../utils/formatDate";
+
 const initialState = {
   amount: "",
   category: "",
   type: "Income",
-  date: new Date(),
+  date: formatDate(new Date()),
 };
 
 const Form = () => {
@@ -39,6 +45,9 @@ const Form = () => {
     setformData(initialState);
   };
 
+  const selectedCategories =
+    formData.type === "Income" ? incomeCategories : expenseCategories;
+
   return (
     <Grid container spacing={2}>
       <Grid item xs={12}>
@@ -55,7 +64,7 @@ const Form = () => {
               setformData({ ...formData, type: e.target.value });
             }}
           >
-            <MenuItem value="Income">Income</MenuItem>
+             <MenuItem value="Income">Income</MenuItem>
             <MenuItem value="Expense">Expense</MenuItem>
           </Select>
         </FormControl>
@@ -69,8 +78,13 @@ const Form = () => {
               setformData({ ...formData, category: e.target.value });
             }}
           >
-            <MenuItem value="business">Business</MenuItem>
-            <MenuItem value="salary">Salary</MenuItem>
+           {
+              selectedCategories.map(sc=>(
+                <MenuItem key={sc.type} value={sc.type}>
+                  {sc.type}
+                </MenuItem>
+              ))
+            }
           </Select>
         </FormControl>
       </Grid>
@@ -93,7 +107,7 @@ const Form = () => {
           fullWidth
           value={formData.date}
           onChange={(e) => {
-            setformData({ ...formData, date: e.target.value });
+            setformData({ ...formData, date: formatDate(e.target.value) });
           }}
         />
       </Grid>
