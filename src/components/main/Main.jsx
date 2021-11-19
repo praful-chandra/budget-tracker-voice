@@ -30,7 +30,9 @@ const Main = () => {
           style={{ lineHeight: "1.5em", marginTop: "20px" }}
         >
           {/* Info card component */}
-          Try saying: ADD INCOME FOR 100RS IN CATEGORY BILL FOR MONDAY
+          <Typography align="center">
+          Try saying: <br /> <strong>ADD INCOME FOR 100RS IN CATEGORY SALARY FOR MONDAY</strong>
+          </Typography>
         </Typography>
         <Divider />
         {/* Form component */}
